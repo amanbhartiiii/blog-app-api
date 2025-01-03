@@ -1,5 +1,6 @@
 package com.bharti.blog_app_api.controller;
 
+import com.bharti.blog_app_api.config.AppConstants;
 import com.bharti.blog_app_api.payload.ApiResponse;
 import com.bharti.blog_app_api.payload.PostDto;
 import com.bharti.blog_app_api.payload.PostResponse;
@@ -49,38 +50,39 @@ public class PostController {
 
     // Get All Post api
     @GetMapping("/")
-    public ResponseEntity<PostResponse> getPostsByPage(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                                                       @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-                                                       @RequestParam(value = "sortBy", defaultValue = "date", required = false) String sortBy,
-                                                       @RequestParam(value = "sortDirection", defaultValue = "ascending", required = false) String sortDirection){
+    public ResponseEntity<PostResponse> getPostsByPage(@RequestParam(value = "pageNo", defaultValue = AppConstants.PAGE_NUMBER, required = false) int pageNo,
+                                                       @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) int pageSize,
+                                                       @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+                                                       @RequestParam(value = "sortDirection", defaultValue = AppConstants.SORT_DIR, required = false) String sortDirection){
         PostResponse posts = this.postService.getAllPost(pageNo, pageSize, sortBy, sortDirection);
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
     // Get all post by User api
     @GetMapping("/user/{userId}")
-    public ResponseEntity<PostResponse> getPostsByUser(@PathVariable int userId, @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                                                       @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-                                                       @RequestParam(value = "sortBy", defaultValue = "date", required = false) String sortBy,
-                                                       @RequestParam(value = "sortDirection", defaultValue = "ascending", required = false) String sortDirection) {
+    public ResponseEntity<PostResponse> getPostsByUser(@PathVariable int userId, @RequestParam(value = "pageNo", defaultValue = AppConstants.PAGE_NUMBER, required = false) int pageNo,
+                                                       @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) int pageSize,
+                                                       @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+                                                       @RequestParam(value = "sortDirection", defaultValue = AppConstants.SORT_DIR, required = false) String sortDirection) {
         PostResponse postList = postService.getAllPostByUser(userId, pageNo, pageSize, sortBy, sortDirection);
         return new ResponseEntity<>(postList, HttpStatus.OK);
     }
 
     // Get All posts by Category
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable int categoryId, @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-                                                            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize,
-                                                           @RequestParam(value = "sortBy", defaultValue = "date", required = false) String sortBy,
-                                                           @RequestParam(value = "sortDirection", defaultValue = "ascending", required = false) String sortDirection) {
+    public ResponseEntity<PostResponse> getPostsByCategory(@PathVariable int categoryId, @RequestParam(value = "pageNo", defaultValue = AppConstants.PAGE_NUMBER, required = false) int pageNo,
+                                                            @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) int pageSize,
+                                                           @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+                                                           @RequestParam(value = "sortDirection", defaultValue = AppConstants.SORT_DIR, required = false) String sortDirection) {
         PostResponse postList = postService.getAllPostByCategory(categoryId, pageNo, pageSize, sortBy, sortDirection);
         return new ResponseEntity<>(postList, HttpStatus.OK);
     }
 
-//    // get All Post by Search
-//    @GetMapping("/search")
-//    public ResponseEntity<List<PostDto>> searchPosts(@RequestParam("keyword")String keyword) {
-//        List<PostDto> posts = this.postService.getAllPostBySearch(keyword);
-//        return new ResponseEntity<>(posts, HttpStatus.OK);
-//    }
+    // Search posts by title
+
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<List<PostDto>> searchPostsByTitle(@PathVariable("keyword")String keyword) {
+        List<PostDto> posts = this.postService.getAllPostBySearch(keyword);
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
 }

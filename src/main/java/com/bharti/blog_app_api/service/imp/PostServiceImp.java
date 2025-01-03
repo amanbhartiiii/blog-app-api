@@ -174,13 +174,14 @@ public class PostServiceImp implements PostService {
     }
 
 
-    // Get All Post By Search
-//    @Override
-//    public List<PostDto> getAllPostBySearch(String keyword) {
-//        List<Post> posts = this.postRepo.findByTitleContaining(keyword);
-//
-//        return posts.stream().map(post->postToDto(post)).toList();
-//    }
+//     Get All Post By Search
+    @Override
+    public List<PostDto> getAllPostBySearch(String keyword) {
+
+        List<Post> posts = this.postRepo.findByPostTitleContaining(keyword);
+
+        return posts.stream().map(post->postToDto(post)).toList();
+    }
 
     private Post dtoToPost(PostDto postDto) {
         return modelMapper.map(postDto, Post.class);

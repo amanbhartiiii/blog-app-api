@@ -22,5 +22,5 @@ public interface PostService {
     PostResponse getAllPostByUser(int postId, int pageNo, int pageSize, String sortBy, String sortDirection);
 
     // Get posts by search keyWord
-//    List<PostDto> getAllPostBySearch(String keyword);
+    List<PostDto> getAllPostBySearch(String keyword);
 }
