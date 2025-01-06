@@ -26,6 +26,7 @@ public class PostDto {
     private CategoryDto category;
 
 
+
     public int getPostId() {
         return postId;
     }
