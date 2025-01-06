@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -31,6 +33,12 @@ public class Post {
 
     @ManyToOne
     private Category category;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    List<Comment> comments = new ArrayList<>();
+
+
+    // Getter and Setter
 
     public int getPostId() {
         return postId;
@@ -86,5 +94,13 @@ public class Post {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

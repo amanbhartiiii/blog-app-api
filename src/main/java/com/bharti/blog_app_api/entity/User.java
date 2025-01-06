@@ -32,6 +32,12 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Post> posts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Comment> comments = new ArrayList<>();
+
+
+
+
     public int getUserId() {
         return userId;
     }
@@ -78,5 +84,13 @@ public class User {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
