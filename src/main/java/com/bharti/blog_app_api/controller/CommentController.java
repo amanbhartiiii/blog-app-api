@@ -22,9 +22,6 @@ public class CommentController {
 
     @PostMapping("/post/{postId}/user/{userId}")
     public ResponseEntity<CommentDto> createComment(@RequestBody CommentDto commentDto, @PathVariable int postId, @PathVariable int userId) {
-//        System.out.println(commentDto);
-//        System.out.println(postId);
-//        System.out.println(userId);
         CommentDto newComment = commentService.addComment(commentDto, postId, userId);
         return new ResponseEntity<>(newComment, HttpStatus.OK);
     }
