@@ -22,9 +22,6 @@ public class CategoryController {
     // Create Category
     @PostMapping("/")
     public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto categoryDto){
-        System.out.println(categoryDto);
-        System.out.println("Controller"+categoryDto.getCategoryTitle());
-        System.out.println("Controller"+categoryDto.getCategoryDescription());
         CategoryDto createdCategoryDto = categoryService.createCategory(categoryDto);
         return new ResponseEntity<>(createdCategoryDto, HttpStatus.CREATED);
     }

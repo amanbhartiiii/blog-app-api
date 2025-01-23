@@ -26,14 +26,8 @@ public class CategoryServiceImp implements CategoryService {
 
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
-        System.out.println("Service "+categoryDto.getCategoryTitle());
-        System.out.println("Service "+categoryDto.getCategoryDescription());
         Category category = dtoToCategory(categoryDto);
-        System.out.println("Service 2 "+categoryDto.getCategoryTitle());
-        System.out.println("Service 2 "+categoryDto.getCategoryDescription());
         Category savedCategory = categoryRepo.save(category);
-        System.out.println("Service 3"+categoryDto.getCategoryTitle());
-        System.out.println("Service 3"+categoryDto.getCategoryDescription());
         return categoryToDto(savedCategory);
     }
 
