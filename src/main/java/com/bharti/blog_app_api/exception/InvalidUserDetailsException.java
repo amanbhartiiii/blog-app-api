@@ -7,4 +7,8 @@ public class InvalidUserDetailsException extends RuntimeException {
         super(message);
         this.message = message;
     }
+
+    public InvalidUserDetailsException() {
+        super();
+    }
 }

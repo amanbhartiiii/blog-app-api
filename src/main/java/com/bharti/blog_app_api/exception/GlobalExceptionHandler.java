@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidUserDetailsException.class)
     public ResponseEntity<ApiResponse> invalidUserDetailsException(InvalidUserDetailsException e) {
         String message = e.getMessage();
-        ApiResponse response = new ApiResponse(message, false);
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        ApiResponse response = new ApiResponse(message, true);
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
